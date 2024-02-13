@@ -1,0 +1,10 @@
+﻿@{
+    var AppInfo = (repos11.Web.Models.AppInfo)ViewData["AppInfo"];
+}
+<footer class="main-footer">
+    <strong>@AppInfo.LegalCopyright <a href="#">@AppInfo.CompanyName</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> @AppInfo.ProductVersion
+    </div>
+</footer>

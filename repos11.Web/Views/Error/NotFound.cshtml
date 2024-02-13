@@ -1,0 +1,26 @@
+﻿@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Layout2.cshtml";
+    }
+
+    ViewBag.Title = "Page Not Found";
+    var message = "you were looking for";
+    if (!string.IsNullOrWhiteSpace(ViewBag.PageNotFoundUrl))
+    {
+        message = $"<strong>\"{ViewBag.PageNotFoundUrl}\"</strong>";
+    }
+}
+<div class="error-page">
+    <h2 class="headline text-warning"> 404</h2>
+
+    <div class="error-content" style="padding-top: 20px;">
+        <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Page not found.</h3>
+
+        <p>
+            We could not find the page @Html.Raw(message)
+            <br />Meanwhile, you may <a href="~/">return to home</a> or contact administrator.
+        </p>
+    </div>
+    <!-- /.error-content -->
+</div>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F9A93CFC-F664-4BA0-9403-537F5DEBB0AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>repos11.Repository</RootNamespace>
+    <AssemblyName>repos11.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CodeFirstStoreFunctions, Version=1.2.0.0, Culture=neutral, PublicKeyToken=46c4868af4307d2c, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.CodeFirstStoreFunctions.1.2.0\lib\net45\CodeFirstStoreFunctions.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="N.EntityFramework.Extensions, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\N.EntityFramework.Extensions.1.7.3\lib\net46\N.EntityFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.0.0\lib\net45\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entity\AppDbConfiguration.cs" />
+    <Compile Include="Entity\Function\FnGetSystemActionModel.cs" />
+    <Compile Include="Entity\Function\FnGetUsersResult.cs" />
+    <Compile Include="Entity\Function\FunctionContext.cs" />
+    <Compile Include="Entity\StoreProcedure\SPGetUsersResult.cs" />
+    <Compile Include="Entity\StoreProcedure\StoreProcedureContext.cs" />
+    <Compile Include="Entity\Systems\SystemActions.cs" />
+    <Compile Include="Entity\Systems\SystemParamaters.cs" />
+    <Compile Include="Entity\UserManagement\GroupRoles.cs" />
+    <Compile Include="Entity\UserManagement\Groups.cs" />
+    <Compile Include="Entity\UserManagement\PermissionActions.cs" />
+    <Compile Include="Entity\UserManagement\Permissions.cs" />
+    <Compile Include="Entity\UserManagement\PermissionCategory.cs" />
+    <Compile Include="Entity\UserManagement\RolePermissions.cs" />
+    <Compile Include="Entity\UserManagement\Roles.cs" />
+    <Compile Include="Entity\UserManagement\UserGroups.cs" />
+    <Compile Include="Entity\UserManagement\UserRoles.cs" />
+    <Compile Include="Entity\UserManagement\Users.cs" />
+    <Compile Include="Interfaces\IGeneralRepository.cs" />
+    <Compile Include="GeneralRepository.cs" />
+    <Compile Include="Migrations\202212301559473_InitialCreate.cs" />
+    <Compile Include="Migrations\202212301559473_InitialCreate.designer.cs">
+      <DependentUpon>202212301559473_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212301603445_AddFuncAndSP.cs" />
+    <Compile Include="Migrations\202212301603445_AddFuncAndSP.designer.cs">
+      <DependentUpon>202212301603445_AddFuncAndSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Systems\Interfaces\ISystemActionsRepository.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="Entity\BaseEntity.cs" />
+    <Compile Include="Entity\IEntity.cs" />
+    <Compile Include="Entity\Master\MasterUsers.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SeedData.cs" />
+    <Compile Include="Entity\ApplicationDbContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\SystemActionsRepository.cs" />
+    <Compile Include="UserManagement\Interfaces\IGroupsRepository.cs" />
+    <Compile Include="UserManagement\Interfaces\IUsersRepository.cs" />
+    <Compile Include="UserManagement\GroupsRepository.cs" />
+    <Compile Include="UserManagement\UsersRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Master\Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202212301559473_InitialCreate.resx">
+      <DependentUpon>202212301559473_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212301603445_AddFuncAndSP.resx">
+      <DependentUpon>202212301603445_AddFuncAndSP.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

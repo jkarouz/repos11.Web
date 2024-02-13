@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">@ViewBag.Title</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>Getting started</h2>
+                        <p>
+                            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                            enables a clean separation of concerns and gives you full control over markup
+                            for enjoyable, agile development.
+                        </p>
+                        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Adminlte</h2>
+                        <p>Best open source admin dashboard & control panel theme. Built on top of Bootstrap, AdminLTE provides a range of responsive, reusable, and commonly used components.</p>
+                        <p><a class="btn btn-default" href="https://adminlte.io/docs/3.2/">Learn more &raquo;</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>DevExtreme</h2>
+                        <p>The DevExtreme jQuery Component Suite is a feature-complete set of 70+ responsive and touch-enabled UI components implemented as jQuery plugins. The components are a data grid, interactive charts, data editors, navigation and multi-purpose UI components..</p>
+                        <p><a class="btn btn-default" href="https://js.devexpress.com/Documentation/Guide/jQuery_Components/Add_DevExtreme_to_a_jQuery_Application/">Learn more &raquo;</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Sample Data Grid</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="gridContainer"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(() => {
+            $('#gridContainer').dxDataGrid({
+                dataSource: {
+                    store: {
+                        type: 'odata',
+                        url: 'https://js.devexpress.com/Demos/SalesViewer/odata/DaySaleDtoes',
+                        key: 'Id',
+                        beforeSend(request) {
+                            request.params.startDate = '2020-05-10';
+                            request.params.endDate = '2020-05-15';
+                        },
+                    },
+                },
+                paging: {
+                    pageSize: 10,
+                },
+                pager: {
+                    showPageSizeSelector: true,
+                    allowedPageSizes: [10, 25, 50, 100],
+                },
+                remoteOperations: false,
+                searchPanel: {
+                    visible: true,
+                    highlightCaseSensitive: true,
+                },
+                groupPanel: { visible: true },
+                grouping: {
+                    autoExpandAll: false,
+                },
+                allowColumnReordering: true,
+                rowAlternationEnabled: true,
+                showBorders: true,
+                columns: [
+                    {
+                        dataField: 'Product',
+                        groupIndex: 0,
+                    },
+                    {
+                        dataField: 'Amount',
+                        caption: 'Sale Amount',
+                        dataType: 'number',
+                        format: 'currency',
+                        alignment: 'right',
+                    },
+                    {
+                        dataField: 'Discount',
+                        caption: 'Discount %',
+                        dataType: 'number',
+                        format: 'percent',
+                        alignment: 'right',
+                        allowGrouping: false,
+                        cellTemplate: discountCellTemplate,
+                        cssClass: 'bullet',
+                    },
+                    {
+                        dataField: 'SaleDate',
+                        dataType: 'date',
+                    },
+                    {
+                        dataField: 'Region',
+                        dataType: 'string',
+                    },
+                    {
+                        dataField: 'Sector',
+                        dataType: 'string',
+                    },
+                    {
+                        dataField: 'Channel',
+                        dataType: 'string',
+                    },
+                    {
+                        dataField: 'Customer',
+                        dataType: 'string',
+                        width: 150,
+                    },
+                ],
+                onContentReady(e) {
+                    if (!collapsed) {
+                        collapsed = true;
+                        e.component.expandRow(['EnviroCare']);
+                    }
+                },
+            });
+        });
+
+        const discountCellTemplate = function (container, options) {
+            $('<div/>').dxBullet({
+                onIncidentOccurred: null,
+                size: {
+                    width: 150,
+                    height: 35,
+                },
+                margin: {
+                    top: 5,
+                    bottom: 0,
+                    left: 5,
+                },
+                showTarget: false,
+                showZeroLevel: true,
+                value: options.value * 100,
+                startScaleValue: 0,
+                endScaleValue: 100,
+                tooltip: {
+                    enabled: true,
+                    font: {
+                        size: 18,
+                    },
+                    paddingTopBottom: 2,
+                    customizeTooltip() {
+                        return { text: options.text };
+                    },
+                    zIndex: 5,
+                },
+            }).appendTo(container);
+        };
+
+        let collapsed = false;
+
+    </script>
+}

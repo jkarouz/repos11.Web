@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    var AppInfo = (repos11.Web.Models.AppInfo)ViewData["AppInfo"];
+}
+<div class="login-box">
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a href="#" class="h3"><b>@AppInfo.Title</b></a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg text-sm">Only input username if development mode.</p>
+            <form action="@Url.Action("Login","Account", new { ReturnUrl = ViewBag.ReturnUrl })" method="post">
+                @Html.AntiForgeryToken()
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="username" placeholder="username">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user-alt"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

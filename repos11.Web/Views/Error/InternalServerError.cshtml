@@ -1,0 +1,83 @@
+﻿@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Layout2.cshtml";
+    }
+
+    ViewBag.Title = "Internal Servr Error";
+    var execption = (Exception)ViewData["exception"];
+    var AppInfo = (repos11.Web.Models.AppInfo)ViewData["AppInfo"];
+}
+<div class="container-fluid">
+    @if (AppInfo.IsDevelopment && execption != null)
+    {
+        var ex = execption;
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Source : @ex.Source</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5>Message</h5>
+                <p class="text-danger">
+                    @ex.Message
+                </p>
+                <h5>Stack Trace</h5>
+                <p class="text-danger">
+                    @ex.StackTrace
+                </p>
+            </div>
+        </div>
+
+        while (ex.InnerException != null)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Source : @ex.Source</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5>Message</h5>
+                    <p class="text-danger">
+                        @ex.Message
+                    </p>
+                    <h5>Stack Trace</h5>
+                    <p class="text-danger">
+                        @ex.StackTrace
+                    </p>
+                </div>
+            </div>
+            ex = ex.InnerException;
+        }
+    }
+    else
+    {
+        <div class="error-page">
+            <h2 class="headline text-danger"> 500</h2>
+            <div class="error-content" style="padding-top: 20px;">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p>
+                        We will work on fixing that right away.
+                        Meanwhile, you may <a href="~/">return to home</a> or contact administrator.
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        We will work on fixing that right away. Please contact administrator.
+                    </p>
+                }
+            </div>
+        </div>
+    }
+</div>

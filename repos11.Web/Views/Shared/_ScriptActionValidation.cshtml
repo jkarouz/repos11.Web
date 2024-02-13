@@ -1,0 +1,19 @@
+﻿@{
+    var AppInfo = (repos11.Web.Models.AppInfo)ViewData["AppInfo"];
+}
+@if (!AppInfo.IsActionDefinedAuthorize && !AppInfo.IsActionDefinedAnonymouse)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            app.alertWarning("page is not authorized", 15000);
+        });
+    </script>
+}
+@if (!AppInfo.IsActionRegistered && !AppInfo.IsActionDefinedAnonymouse)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            app.alertWarning("page is not registered", 15000);
+        });
+    </script>
+}

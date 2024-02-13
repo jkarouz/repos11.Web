@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Master Users";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">@ViewBag.Title</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="gridContainer"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        var userIndex = {
+            init: function () {
+                app.dataGrid.initialize({
+                    key: "Id",
+                    elementId: "gridContainer",
+                    formView: "UserForm",
+                    formTitle: "User",
+                    formWidth: '60%',
+                    formHeight: '60%',
+                    loadUrl: baseUrl + "Users/Get",
+                    formUrl: baseUrl + "Users/Form",
+                    saveUrl: baseUrl + "Users/Save",
+                    deleteUrl: baseUrl + "Users/Delete",
+                    columns: [
+                        {
+                            dataField: "Id",
+                            visible: false
+                        },
+                        {
+                            dataField: "Name",
+                            caption: "Full Name",
+                            sortOrder: "asc",
+                        },
+                        {
+                            dataField: "UserName",
+                            caption: "UserName",
+                            sortOrder: "asc",
+                        },
+                        {
+                            dataField: "Email",
+                            caption: "Email",
+                            sortOrder: "asc",
+                        }
+                    ]
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            userIndex.init();
+        });
+    </script>
+}
